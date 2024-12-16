@@ -11,6 +11,8 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        integral: "Integral CF', 'sans-serif",
+        'custom-black': 'rgba(0, 0, 0, 0.1)',
       },
     },
   },
