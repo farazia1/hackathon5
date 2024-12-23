@@ -14,18 +14,20 @@ export default function Page() {
   };
 
   return (
-    <div className="container   py-6">
-      <h1 className="text-[40px] font-[700] leading-[48px] text-left  decoration-solid"> YOUR CART</h1>
-      <div className="md:flex  items-start gap-[20px]">
+    <div className="container py-6">
+      <h1 className="text-[40px] font-[700] leading-[48px] text-left decoration-solid">
+        YOUR CART
+      </h1>
+      <div className="md:flex items-start gap-[20px]">
         {/* Left Div */}
-        <div className=" md:w-[715px] border p-4">
+        <div className="md:w-[715px] border p-4">
           {Array.from({ length: 3 }).map((_, index) => (
             <div
               key={index}
-              className="md:w-[667px] h-[124px] flex gap-4 border-b m-4 last:border-b-0"
+              className="md:w-[667px] h-[124px] flex gap-4 border-b m-4 last:border-b-0 transition-all duration-300 hover:shadow-lg hover:border-gray-300"
             >
               {/* Image */}
-              <div className="w-[110px] h-[110px]">
+              <div className="w-[110px] h-[110px] transition-transform duration-300 hover:scale-105">
                 <img
                   src={
                     index === 0
@@ -44,12 +46,12 @@ export default function Page() {
                 {/* Details */}
                 <div>
                   <div className="flex justify-between items-start">
-                    <h2 className="text-base font-semibold truncate">
+                    <h2 className="text-base font-semibold truncate transition-all duration-300 hover:text-blue-500">
                       Gradient Graphic T-shirt
                     </h2>
                     <button
-                      onClick={() => console.log("Remove item")}
-                      className="text-gray-500 hover:text-red-600"
+                      onClick={handleRemoveItem}
+                      className="text-gray-500 hover:text-red-600 transition-colors duration-300"
                       aria-label="Remove item"
                     >
                       <img src="/Frame (1).png" alt="Remove" className="w-5 h-5" />
@@ -65,14 +67,14 @@ export default function Page() {
                   <div className="flex items-center gap-2">
                     <button
                       onClick={handleDecrement}
-                      className="px-2 py-1 bg-gray-200 text-gray-800 rounded hover:bg-gray-300"
+                      className="px-2 py-1 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 transition-colors duration-300"
                     >
                       -
                     </button>
                     <span className="px-3 py-1 border rounded">{quantity}</span>
                     <button
                       onClick={handleIncrement}
-                      className="px-2 py-1 bg-gray-200 text-gray-800 rounded hover:bg-gray-300"
+                      className="px-2 py-1 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 transition-colors duration-300"
                     >
                       +
                     </button>
@@ -109,15 +111,15 @@ export default function Page() {
             <input
               type="text"
               placeholder="Add promo code"
-              className="w-[338px] px-3 py-2 border rounded"
+              className="w-[338px] px-3 py-2 border rounded transition-all duration-300 hover:shadow-md"
             />
-            <button className="w-[119px] px-3 py-2 bg-gray-800 text-white rounded hover:bg-gray-900">
+            <button className=" w-[119px] px-3 py-2 bg-gray-800 text-white rounded hover:bg-gray-900 transition-colors duration-300">
               Apply
             </button>
           </div>
 
           {/* Go to Checkout Button */}
-          <button className="w-[457px] flex items-center justify-center gap-2 px-4 py-3 mt-4 bg-black text-white rounded hover:bg-gray-900">
+          <button className="w-[457px] flex items-center justify-center gap-2 px-4 py-3 mt-4 bg-black text-white rounded hover:bg-gray-900 transition-colors duration-300">
             Go to Checkout
             <svg
               xmlns="http://www.w3.org/2000/svg"

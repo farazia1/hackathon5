@@ -1,5 +1,4 @@
-"use client";
-
+"use client"
 import React, { useState } from "react";
 import StarRating from "../../component/star/page";
 import Allreviews from "../All-reviews/page";
@@ -40,11 +39,11 @@ const AddToCart = () => {
                   key={index}
                   src={image}
                   alt={`Shirt Thumbnail ${index + 1}`}
-                  className={`w-[100px] md:w-[150px] h-[100px] md:h-[130px] object-cover cursor-pointer transition ${
+                  className={`w-[100px] md:w-[150px] h-[100px] md:h-[130px] object-cover cursor-pointer transition-transform duration-300 ${
                     selectedImage === image
                       ? "border-blue-500 border-2"
                       : "border-2 border-transparent"
-                  }`}
+                  } hover:scale-110`}
                   onClick={() => setSelectedImage(image)} // Update the selected image
                 />
               )
@@ -56,20 +55,22 @@ const AddToCart = () => {
             <img
               src={selectedImage}
               alt="Large Shirt"
-              className="w-[300px] md:w-[400px] h-auto rounded-3xl"
+              className="w-[300px] md:w-[400px] h-auto rounded-3xl transition-transform duration-300 hover:scale-110"
             />
           </div>
         </div>
 
         {/* Details Section */}
         <div className="flex flex-col gap-3 w-full md:w-[600px] p-2">
-          <h1 className="text-4xl pt-4 font-bold">One Life Graphic T-shirt</h1>
+          <h1 className="text-4xl pt-4 font-bold transition-transform duration-300 hover:scale-105">
+            One Life Graphic T-shirt
+          </h1>
           <StarRating
             rating={4.5}
             originalPrice={300}
             discountPercentage={40}
           />
-          <p className="text-lg text-gray-600">
+          <p className="text-lg text-gray-600 transition-transform duration-300 hover:scale-105">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           </p>
           <div>
@@ -83,7 +84,7 @@ const AddToCart = () => {
                 <button
                   key={color}
                   onClick={() => setSelectedColor(color)}
-                  className={`w-8 h-8 rounded-full ${
+                  className={`w-8 h-8 rounded-full transition-transform duration-300 hover:scale-110 ${
                     selectedColor === color ? "ring-2 ring-blue-500" : ""
                   }`}
                   style={{ backgroundColor: bgColor }}
@@ -99,7 +100,7 @@ const AddToCart = () => {
                 <button
                   key={size}
                   onClick={() => setSelectedSize(size)}
-                  className={`px-4 py-2 border rounded-lg ${
+                  className={`px-4 py-2 border rounded-lg transition-transform duration-300 hover:scale-110 ${
                     selectedSize === size ? "bg-black text-white" : ""
                   }`}
                 >
@@ -115,14 +116,14 @@ const AddToCart = () => {
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="px-3 py-2 border rounded-lg"
+                  className="px-3 py-2 border rounded-lg transition-transform duration-300 hover:scale-110"
                 >
                   -
                 </button>
                 <span className="px-4">{quantity}</span>
                 <button
                   onClick={() => setQuantity(quantity + 1)}
-                  className="px-3 py-2 border rounded-lg"
+                  className="px-3 py-2 border rounded-lg transition-transform duration-300 hover:scale-110"
                 >
                   +
                 </button>
@@ -130,7 +131,7 @@ const AddToCart = () => {
 
               <button
                 onClick={handleAddToCart}
-                className="px-6 py-3 w-[350px] bg-black text-white rounded-lg hover:bg-gray-800"
+                className="px-6 py-3 w-[350px] bg-black text-white rounded-lg hover:bg-gray-800 transition-transform duration-300 hover:scale-110"
               >
                 Add to Cart
               </button>
