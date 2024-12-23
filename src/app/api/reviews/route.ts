@@ -3,7 +3,7 @@
 import { NextResponse } from "next/server";
 
 // Sample reviews data (in a real app, this would come from a database)
-let reviews = [
+const reviews = [
   { id: 1, name: "Alice", rating: 5, review: "Excellent product!" },
   { id: 2, name: "Bob", rating: 4, review: "Very good, but could improve." }
 ];
@@ -21,9 +21,7 @@ export async function POST(request: Request) {
     reviews.push(newReview);  // Add the new review to the reviews array
 
     return NextResponse.json(newReview);  // Return the new review
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: "Failed to process request" }, { status: 500 });
   }
 }
-
-  

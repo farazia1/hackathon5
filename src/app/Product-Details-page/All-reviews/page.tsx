@@ -1,5 +1,4 @@
 import React from "react";
-import Review from "../../component/reviews-cart/page"; // Adjust the import path
 import StarRating from "../../component/star/page";
 import TabNavigation from "@/app/component/tab-navigation/page";
 

@@ -9,12 +9,12 @@ const AddToCart = () => {
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [quantity, setQuantity] = useState<number>(1);
 
-  const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseInt(e.target.value, 10);
-    if (value > 0) {
-      setQuantity(value);
-    }
-  };
+  // const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const value = parseInt(e.target.value, 10);
+  //   if (value > 0) {
+  //     setQuantity(value);
+  //   }
+  // };
 
   const handleAddToCart = () => {
     if (!selectedColor || !selectedSize) {

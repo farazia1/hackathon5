@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-const Navbar = ({ onSearch }: { onSearch: (query: string) => void }) => {
+const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -17,8 +17,7 @@ const Navbar = ({ onSearch }: { onSearch: (query: string) => void }) => {
   };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value);
-    onSearch(e.target.value); // Pass the search query to the parent
+    setSearchQuery(e.target.value); // Just update the search query without linking to any external logic
   };
 
   return (
@@ -135,15 +134,18 @@ const Navbar = ({ onSearch }: { onSearch: (query: string) => void }) => {
           </li>
         </ul>
 
+        {/* Search input */}
         <div className="hidden md:flex items-center gap-6">
           <input
             type="text"
             value={searchQuery}
-            onChange={handleSearchChange}
+            onChange={handleSearchChange} // Search update logic remains but with no external link
             placeholder="Search..."
             className="w-[200px] px-4 py-2 rounded-[62px] bg-[#f0f0f0] text-black focus:outline-none focus:ring-2 focus:ring-blue-500 transition-transform duration-300 hover:scale-110"
           />
-          <Image
+
+          {/* Image icons */}
+          <Image 
             src="/Vector (1).png"
             alt="Search Icon"
             width={24}
