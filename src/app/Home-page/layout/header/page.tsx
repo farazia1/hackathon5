@@ -2,99 +2,151 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  
+
   return (
-    <div className="relative top-[24px] ml-[100px] flex items-center justify-around pt-16 w-[1240px] gap-10">
-      <h1 className="font-[integral CF] size-8 font-bold">SHOP.CO</h1>
-      <ul className="flex space-x-4">
-        <li>
+    <nav className="bg-white shadow-md  w-full top-8 sticky z-10">
+      <div className="relative flex items-center justify-between px-6 py-4">
+        {/* Logo */}
+        <Link href="/"><h1 className="font-[integral CF] text-2xl font-bold">SHOP.CO</h1></Link>
+
+        {/* Burger Menu Button */}
+        <div className="md:hidden">
           <button
-            className="hover:text-gray-300 focus:outline-none"
-            onClick={toggleDropdown}
+            onClick={toggleMenu}
+            className="text-gray-800 focus:outline-none"
           >
-            Shop
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="2"
-              stroke="currentColor"
-              className="w-4 h-4 inline ml-1"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M19 9l-7 7-7-7"
-              />
-            </svg>
+            {isMenuOpen ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            )}
           </button>
+        </div>
 
-          {/* Dropdown Menu */}
-          {isDropdownOpen && (
-            <div className="absolute mt-2 z-50 bg-white text-black rounded shadow-lg w-40">
-              <Link
-                href="/shop/mens"
-                className="block px-4 py-2 hover:bg-gray-100"
+        {/* Navigation Links */}
+        <ul
+          className={`${
+            isMenuOpen ? "block" : "hidden"
+          } absolute top-16 left-0 w-full bg-white text-black md:static md:flex md:space-x-8 md:items-center md:w-auto`}
+        >
+          <li>
+            <button
+              className="hover:text-gray-500 focus:outline-none px-4 py-2 block"
+              onClick={toggleDropdown}
+            >
+              Shop
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="2"
+                stroke="currentColor"
+                className="w-4 h-4 inline ml-1"
               >
-                Mens
-              </Link>
-              <Link
-                href="/component/filter"
-                className="block px-4 py-2 hover:bg-gray-100"
-              >
-                Casual
-              </Link>
-              <Link
-                href="/Product-Details-page/Addtocart"
-                className="block px-4 py-2 hover:bg-gray-100"
-              >
-                Cart
-              </Link>
-              <Link
-                href="/cart"
-                className="block px-4 py-2 hover:bg-gray-100"
-              >
-                li
-              </Link>
-            </div>
-          )}
-        </li>
-        <li>On Sell</li>
-        <li>New Arrivals</li>
-        <li>Brands</li>
-      </ul>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </button>
 
-      <div className="relative w-full max-w-sm rounded-3xl">
-        <input
-          type="text"
-          placeholder="Search..."
-          className="w-[500px] px-4 py-2 rounded-[62px] bg-[#f0f0f0] text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
+            {/* Dropdown Menu */}
+            {isDropdownOpen && (
+              <div className="bg-white text-black shadow-md rounded-md">
+                <Link
+                  href="/shop/mens"
+                  className="block px-4 py-2 hover:bg-gray-100"
+                >
+                  Mens
+                </Link>
+                <Link
+                  href="/component/filter"
+                  className="block px-4 py-2 hover:bg-gray-100"
+                >
+                  Casual
+                </Link>
+                <Link
+                  href="/Product-Details-page/Addtocart"
+                  className="block px-4 py-2 hover:bg-gray-100"
+                >
+                  Cart
+                </Link>
+                <Link href="/cart" className="block px-4 py-2 hover:bg-gray-100">
+                  Checkout
+                </Link>
+              </div>
+            )}
+          </li>
+          <li className="px-4 py-2 hover:text-gray-500">On Sell</li>
+          <li className="px-4 py-2 hover:text-gray-500">New Arrivals</li>
+          <li className="px-4 py-2 hover:text-gray-500">Brands</li>
+        </ul>
+
+        {/* Search Box and Icons */}
+        <div className="hidden md:flex items-center gap-6">
+          <input
+            type="text"
+            placeholder="Search..."
+            className="w-[200px] px-4 py-2 rounded-[62px] bg-[#f0f0f0] text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <Image
+            src="/Vector (1).png"
+            alt="Search Icon"
+            width={24}
+            height={24}
+            className="hero-image"
+          />
+          <Image
+            src="/Vector.png"
+            alt="Cart Icon"
+            width={24}
+            height={24}
+            className="hero-image"
+          />
+        </div>
       </div>
-
-      <div className="flex gap-6">
-        <Image
-          src="/Vector (1).png"
-          alt="Hero Image"
-          width={24}
-          height={24}
-          className="hero-image"
-        />
-        <Image
-          src="/Vector.png"
-          alt="Hero Image"
-          width={24}
-          height={24}
-          className="hero-image"
-        />
-      </div>
-    </div>
+    </nav>
   );
 };
 

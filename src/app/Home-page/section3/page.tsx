@@ -3,7 +3,7 @@ import StarRating from "../../component/star/page";
 
 const Section3 = () => {
   return (
-    <div className="w-full h-[650px]">
+    <div className="w-full h-[650px] mx:auto">
       <h1 className="flex justify-center text-6xl pt-20 pb-20 font-bold text-black">
         Top Selling
       </h1>
@@ -23,12 +23,12 @@ const Section3 = () => {
             
           />
         </div>
-        <div>
+        <div className="hidden md:block">
           <img src="/tbb.png" alt="" className="h-[298px] w-[280px]" />
           <h1>LOOSE FIT BERMUDA SHORTS</h1>
           <StarRating rating={3} originalPrice={80} />
         </div>
-        <div>
+        <div className="hidden lg:block">
           <img src="/taa.png" alt="" className="h-[298px] w-[280px]" />
           <h1>FADED SKINNY JEANS</h1>
           <StarRating

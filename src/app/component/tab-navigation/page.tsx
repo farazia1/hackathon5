@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Tabreviews from "../tabreviews";
-import FilterComponent from "../filter/page";
+import FilterComponent from "../../Product-Details-page/page";
 import Faq from "../faq";
 
 const TabNavigation = () => {

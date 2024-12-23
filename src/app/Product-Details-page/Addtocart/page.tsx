@@ -30,16 +30,17 @@ const AddToCart = () => {
   return (
     <div>
       <div className="flex flex-col md:flex-row items-start justify-between gap-6 p-6">
-        <div className="flex flex-col md:flex-row items-start justify-between gap-6 p-6">
+        {/* Images Section */}
+        <div className="flex flex-col-reverse md:flex-row gap-6 items-start">
           {/* Left column with 3 clickable small images */}
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-row md:flex-col gap-4 md:mr-6">
             {["/image 2.png", "/image 5.png", "/image 6.png"].map(
               (image, index) => (
                 <img
                   key={index}
                   src={image}
                   alt={`Shirt Thumbnail ${index + 1}`}
-                  className={`w-[150px] h-[130px] object-cover cursor-pointer transition ${
+                  className={`w-[100px] md:w-[150px] h-[100px] md:h-[130px] object-cover cursor-pointer transition ${
                     selectedImage === image
                       ? "border-blue-500 border-2"
                       : "border-2 border-transparent"
@@ -55,12 +56,13 @@ const AddToCart = () => {
             <img
               src={selectedImage}
               alt="Large Shirt"
-              className="w-[400px] h-auto rounded-3xl"
+              className="w-[300px] md:w-[400px] h-auto rounded-3xl"
             />
           </div>
         </div>
 
-        <div className="flex flex-col gap-3 w-[600px] p-2">
+        {/* Details Section */}
+        <div className="flex flex-col gap-3 w-full md:w-[600px] p-2">
           <h1 className="text-4xl pt-4 font-bold">One Life Graphic T-shirt</h1>
           <StarRating
             rating={4.5}

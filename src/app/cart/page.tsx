@@ -16,13 +16,13 @@ export default function Page() {
   return (
     <div className="container   py-6">
       <h1 className="text-[40px] font-[700] leading-[48px] text-left  decoration-solid"> YOUR CART</h1>
-      <div className="flex  items-start gap-[20px]">
+      <div className="md:flex  items-start gap-[20px]">
         {/* Left Div */}
-        <div className="w-[715px] border p-4">
+        <div className=" md:w-[715px] border p-4">
           {Array.from({ length: 3 }).map((_, index) => (
             <div
               key={index}
-              className="w-[667px] h-[124px] flex gap-4 border-b m-4 last:border-b-0"
+              className="md:w-[667px] h-[124px] flex gap-4 border-b m-4 last:border-b-0"
             >
               {/* Image */}
               <div className="w-[110px] h-[110px]">
@@ -84,7 +84,7 @@ export default function Page() {
         </div>
 
         {/* Right Div */}
-        <div className="w-[505px] border p-4">
+        <div className="md:w-[505px] border p-4">
           <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
 
           <div className="flex justify-between items-center pt-4">

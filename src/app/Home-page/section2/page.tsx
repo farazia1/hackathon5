@@ -3,11 +3,12 @@ import StarRating from "../../component/star/page";
 
 const Section = () => {
   return (
-    <div className="w-full h-[650px]">
+    <div className="w-full h-[650px]  pl-6">
       <h1 className="flex justify-center text-6xl pt-20 pb-20 font-bold text-black">
         New Arrival
       </h1>
-      <div className="flex justify-around space-x-4">
+      
+      <div className="flex flex-around space-x-4">
         {" "}
         <div>
           <img src="/ta.png" alt="" className="h-[298px] w-[280px]" />
@@ -23,13 +24,13 @@ const Section = () => {
             discountPercentage={20}
           />
         </div>
-        <div>
-          <img src="/tc.png" alt="" className="h-[298px] w-[280px]" />
+        <div className="hidden md:block">
+          <img src="/tc.png" alt="" className=" h-[298px] w-[280px]" />
           <h1>CHECKERED SHIRT</h1>
           <StarRating rating={4.5} originalPrice={180} />
         </div>
-        <div>
-          <img src="/td.png" alt="" className="h-[298px] w-[280px]" />
+        <div className="hidden lg:block">
+          <img src="/td.png" alt="" className=" h-[298px] w-[280px]" />
           <h1>SLEEVE STRIPED T-SHIRT</h1>
           <StarRating
             rating={4.5}

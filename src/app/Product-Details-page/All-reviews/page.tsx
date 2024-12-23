@@ -30,7 +30,7 @@ const Allreviews = () => {
             discountPercentage={20}
           />
         </div>
-        <div>
+        <div className="hidden md:block ">
           <img src="/Frame 33.png" alt="" className="h-[298px] w-[280px]" />
           <h1>SKINNY FIT JEANS</h1>
           <StarRating
@@ -39,8 +39,8 @@ const Allreviews = () => {
             discountPercentage={20}
           />
         </div>
-        <div>
-          <img src="/Frame 34.png" alt="" className="h-[298px] w-[280px]" />
+        <div className="hidden lg:block">
+          <img src="/Frame 34.png" alt="" className=" h-[298px] w-[280px]" />
           <h1>SKINNY FIT JEANS</h1>
           <StarRating
             rating={3.5}

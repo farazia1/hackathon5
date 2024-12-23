@@ -8,7 +8,7 @@ export default function PromoBanner() {
   if (!isVisible) return null; // Agar banner close ho gaya, to kuch bhi return na karein.
 
   return (
-    <div className="fixed top-0 w-[1440px] bg-black  text-white text-center py-2 px-4 h-9 z-50">
+    <div className="fixed top-0 md:w-full  bg-black  text-white text-center py-2 px-1 h-9 z-50">
       <div className="flex justify-around items-center space-x-4 max-w-7xl mx-auto">
         <p className="text-sm md:text-base font-medium items-center">
         Sign up and get 20% off to your first order.  <Link

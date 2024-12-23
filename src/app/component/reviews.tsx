@@ -85,14 +85,14 @@ const Reviews = () => {
       {/* Reviews Section */}
       <div className="w-full max-w-4xl mb-12">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-3xl font-extrabold text-gray-900">
-            Happy Customers’ Reviews
+          <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900">
+           Our Happy Customers
           </h2>
           <div className="space-x-4">
             <button
               onClick={handlePrev}
               disabled={currentIndex === 0}
-              className={`text-gray-500 ${
+              className={`text-gray-500  ${
                 currentIndex > 0
                   ? "hover:text-blue-500"
                   : "cursor-not-allowed opacity-50"

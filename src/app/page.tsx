@@ -7,7 +7,7 @@ import Section from './Home-page/section2/page'
 import Section3 from './Home-page/section3/page'
 import Section4 from './Home-page/section4/page'
 import Section5 from './Home-page/section5/page'
-import FilterComponent from './component/filter/page'
+import FilterComponent from './Product-Details-page/page'
 
 const Home = () => {
   return (
