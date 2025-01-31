@@ -1,21 +1,26 @@
 import React from 'react'
 import PromoBanner from './Home-page/layout/banner/page'
 import Hero from './Home-page/hero/page'
-import Section from './Home-page/section2/page'
-import Section3 from './Home-page/section3/page'
 import Section4 from './Home-page/section4/page'
-import Section5 from './Home-page/section5/page'
+import TopSelling from './Home-page/topSelling/page'
+import NewArrivalPage from './Home-page/newArrival/page'
+import ShippoData from '@/app/component/shippoData/page'
+
+
 
 const Home = () => {
   return (
     <div className=''>
       <PromoBanner/>
-      
+
+
       <Hero/>
-      <Section/>
-      <Section3/>
+      {/* <Section/> */}
+      <ShippoData/>
+     <TopSelling/>
+     <NewArrivalPage/>
+      {/* <Section3/> */}
       <Section4/>
-      <Section5/>
    
       
     </div>

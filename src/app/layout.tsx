@@ -38,7 +38,7 @@ export default function RootLayout({
         <Navbar/>
       <Breadcrumb/>
         {children}
-        <Section6/>
+        {/* <Section6/> */}
         <ScreenSize/>
       </body>
     </html>

@@ -48,7 +48,7 @@ const Hero = () => {
 
       {/* Image and Logo Section */}
       <div className="relative lg:w-full">
-        <div className="relative flex lg:ml-[700px] w-[390px] lg:w-[557px] lg:h-[663px] transition-all duration-300 hover:scale-105">
+        <div className="relative flex lg:ml-[700px] w-[390px] lg:w-[557px] lg:h-[663px] transition-all duration-300 ">
           <img
             src="/bb (2).png"
             alt=""

@@ -1,7 +1,5 @@
 "use client"
 import React, { useState } from "react";
-import StarRating from "../../component/star/page";
-import Allreviews from "../All-reviews/page";
 
 const AddToCart = () => {
   const [selectedImage, setSelectedImage] = useState("/image 1.png");
@@ -65,11 +63,7 @@ const AddToCart = () => {
           <h1 className="text-4xl pt-4 font-bold transition-transform duration-300 hover:scale-105">
             One Life Graphic T-shirt
           </h1>
-          <StarRating
-            rating={4.5}
-            originalPrice={300}
-            discountPercentage={40}
-          />
+          
           <p className="text-lg text-gray-600 transition-transform duration-300 hover:scale-105">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           </p>
@@ -139,7 +133,7 @@ const AddToCart = () => {
           </div>
         </div>
       </div>
-      <Allreviews />
+      
     </div>
   );
 };

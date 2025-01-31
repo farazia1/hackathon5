@@ -1,12 +1,84 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { auth } from "@/app/firebaseConfig";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+
+import ProductModal from "@/app/component/productModal";
+
+interface Product {
+  _id: string;
+  name: string;
+  price: number;
+  image: string;
+  // Add other properties based on your product structure
+}
 
 const Navbar = () => {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+  // Fetch products based on search query
+  const fetchData = async (query: string) => {
+    setLoading(true);
+    try {
+      const response = await fetch(`/api/search?query=${query}`);
+      const data = await response.json();
+      setProducts(data); // Update state with fetched products
+      setIsModalOpen(true); // Open modal with the fetched data
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const [isSearchDropdownOpen, setIsSearchDropdownOpen] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [authAction, setAuthAction] = useState<"login" | "signup" | null>(null);
+  const [error, setError] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+
+  const toggleSearchDropdown = () => {
+    setIsSearchDropdownOpen(!isSearchDropdownOpen);
+    setError(""); // Clear errors when dropdown opens
+  };
+
+  const handleSignup = async () => {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      console.log("User Signed Up:", userCredential.user);
+      setAuthAction(null); // Close the form after signup
+    } catch (err: any) {
+      setError(err.message);
+    }
+  };
+
+  const handleSignin = async () => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      console.log("User Signed In:", userCredential.user);
+      setAuthAction(null); // Close the form after login
+    } catch (err: any) {
+      setError(err.message);
+    }
+  };
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -115,6 +187,12 @@ const Navbar = () => {
                   Cart
                 </Link>
                 <Link
+                  href="/mock-api"
+                  className="block px-4 py-2 hover:bg-gray-100 transition-transform duration-300 hover:scale-110"
+                >
+                  mock-api
+                </Link>
+                <Link
                   href="/cart"
                   className="block px-4 py-2 hover:bg-gray-100 transition-transform duration-300 hover:scale-110"
                 >
@@ -123,42 +201,132 @@ const Navbar = () => {
               </div>
             )}
           </li>
-          <li className="px-4 py-2 hover:text-gray-500 transition-transform duration-300 hover:scale-110">
+          <Link
+            href="/Home-page/topSelling"
+            className="px-4 py-2 hover:text-gray-500 transition-transform duration-300 hover:scale-110"
+          >
             On Sell
-          </li>
-          <li className="px-4 py-2 hover:text-gray-500 transition-transform duration-300 hover:scale-110">
-            New Arrivals
-          </li>
+          </Link>
+          <Link href="/Home-page/newArrival">
+            <li className="px-4 py-2 hover:text-gray-500 transition-transform duration-300 hover:scale-110">
+              New Arrivals
+            </li>
+          </Link>
           <li className="px-4 py-2 hover:text-gray-500 transition-transform duration-300 hover:scale-110">
             Brands
           </li>
         </ul>
 
-        {/* Search input */}
         <div className="hidden md:flex items-center gap-6">
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={handleSearchChange} // Search update logic remains but with no external link
-            placeholder="Search..."
-            className="w-[200px] px-4 py-2 rounded-[62px] bg-[#f0f0f0] text-black focus:outline-none focus:ring-2 focus:ring-blue-500 transition-transform duration-300 hover:scale-110"
-          />
+          <div>
+            <input
+              type="text"
+              id="globalSearchInput"
+              placeholder="Search products..."
+              // className="search-input"
+              className="w-[200px] px-4 py-2 rounded-[62px] bg-[#f0f0f0] text-black focus:outline-none focus:ring-2 focus:ring-blue-500 transition-transform duration-300 hover:scale-110"
+              onChange={(e) => fetchData(e.target.value)} // Trigger search on input change
+            />
 
-          {/* Image icons */}
-          <Image 
-            src="/Vector (1).png"
-            alt="Search Icon"
-            width={24}
-            height={24}
-            className="hero-image transition-transform duration-300 hover:scale-110"
-          />
+            {/* Loading indicator */}
+            {loading && <p>Loading...</p>}
+
+            {/* Display modal with products */}
+            <ProductModal
+              products={products}
+              isOpen={isModalOpen}
+              onClose={() => setIsModalOpen(false)} // Close modal when clicked
+            />
+          </div>
+
+          {/* <CartPage/> */}
+          <Link href="/addcart">
+            {/* Search Icon */}
+
+            <Image
+              src="/Vector (1).png"
+              alt="Search Icon"
+              width={24}
+              height={24}
+              className="hero-image transition-transform duration-300 hover:scale-110"
+            />
+          </Link>
+
+          {/* Auth Dropdown */}
           <Image
             src="/Vector.png"
             alt="Cart Icon"
             width={24}
             height={24}
+            onClick={toggleSearchDropdown}
             className="hero-image transition-transform duration-300 hover:scale-110"
           />
+          {isSearchDropdownOpen && (
+            <div className="absolute right-6 top-16 bg-white shadow-lg rounded-md p-4 w-64 z-20">
+              {authAction === null ? (
+                <div>
+                  <button
+                    onClick={() => setAuthAction("login")}
+                    className="block w-full px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 mb-2"
+                  >
+                    Login
+                  </button>
+                  <button
+                    onClick={() => setAuthAction("signup")}
+                    className="block w-full px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+                  >
+                    Sign Up
+                  </button>
+                </div>
+              ) : (
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    authAction === "login" ? handleSignin() : handleSignup();
+                  }}
+                >
+                  <h3 className="text-lg font-semibold mb-2">
+                    {authAction === "login" ? "Login" : "Sign Up"}
+                  </h3>
+                  {error && (
+                    <p className="text-red-500 text-sm mb-2">{error}</p>
+                  )}
+                  <input
+                    type="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full mb-2 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="w-full mb-4 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+
+                  <button
+                    type="submit"
+                    className={`w-full px-4 py-2 rounded-md text-white ${
+                      authAction === "login"
+                        ? "bg-blue-500 hover:bg-blue-600"
+                        : "bg-green-500 hover:bg-green-600"
+                    }`}
+                  >
+                    {authAction === "login" ? "Login" : "Sign Up"}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setAuthAction(null)}
+                    className="w-full mt-2 px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400"
+                  >
+                    Cancel
+                  </button>
+                </form>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </nav>

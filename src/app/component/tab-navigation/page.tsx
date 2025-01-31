@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import Tabreviews from "../tabreviews";
+// import Tabreviews from "../tabreviews";
 import Faq from "../faq";
 
 const TabNavigation = () => {
@@ -12,7 +12,7 @@ const TabNavigation = () => {
       case "productDetails":
         return <Faq/>;
       case "ratingsAndReviews":
-        return <Tabreviews />;
+        // return <Tabreviews />;
       case "faqs":
         return <p>Yahan FAQs ka content hoga.</p>;
       default:
