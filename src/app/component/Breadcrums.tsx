@@ -3,15 +3,15 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const Breadcrumb = () => {
-  const pathname = usePathname();
+  const pathname = usePathname() || "/";
 
   // Split the route path into parts
   const pathParts = pathname.split("/").filter(Boolean);
 
   return (
-    <nav className="text-sm text-gray-600 my-4">
+    <nav className="text-sm text-gray-600 mt-10">
       <ol className="list-none flex items-center space-x-2">
-        {/* Home Link */}
+
         <li>
           <Link href="/" className="text-blue-500 hover:underline">
             Home
@@ -24,7 +24,8 @@ const Breadcrumb = () => {
           return (
             <li key={index} className="flex items-center">
               {/* Separator */}
-              <span className="mx-2">/</span>
+              <span className="mx-2"> {">"}
+              </span>
 
               {/* Link for intermediate paths */}
               {index === pathParts.length - 1 ? (

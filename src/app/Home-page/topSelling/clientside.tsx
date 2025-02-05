@@ -31,7 +31,7 @@ export function TopSellingClient({ data }: TopSellingClientProps) {
   return (
     <div>
 
-      <h1 className="flex justify-center text-6xl pt-20 pb-20 font-bold text-black transition-transform duration-300 hover:scale-90">Our Products</h1>
+      <h1 className="flex justify-center text-6xl pt-20 pb-20 font-bold text-black transition-transform duration-300 hover:scale-90">TOP SELLING</h1>
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 mx-auto p-4">
       {data.length > 0 ? (
         data.map((product: Product) => (

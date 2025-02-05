@@ -1,5 +1,6 @@
 "use client"
 import React, { useState } from "react";
+import TabNavigation from "../component/tab-navigation/page";
 
 const AddToCart = () => {
   const [selectedImage, setSelectedImage] = useState("/image 1.png");
@@ -133,7 +134,7 @@ const AddToCart = () => {
           </div>
         </div>
       </div>
-      
+      <TabNavigation/>
     </div>
   );
 };

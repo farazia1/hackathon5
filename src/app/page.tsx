@@ -4,7 +4,6 @@ import Hero from './Home-page/hero/page'
 import Section4 from './Home-page/section4/page'
 import TopSelling from './Home-page/topSelling/page'
 import NewArrivalPage from './Home-page/newArrival/page'
-import ShippoData from '@/app/component/shippoData/page'
 
 
 
@@ -16,7 +15,7 @@ const Home = () => {
 
       <Hero/>
       {/* <Section/> */}
-      <ShippoData/>
+      
      <TopSelling/>
      <NewArrivalPage/>
       {/* <Section3/> */}

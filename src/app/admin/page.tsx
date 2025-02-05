@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { client } from '../../sanity/lib/client';  // Sanity client
 import { useRouter } from 'next/navigation';
 import { auth } from '../firebaseConfig';  // Import Firebase auth
-import { onAuthStateChanged, User } from 'firebase/auth';  // Import User type from Firebase
+import { onAuthStateChanged } from 'firebase/auth';  // Import User type from Firebase
 import AdminNavbar from './navbaradmin/page';
 
 interface Order {
@@ -15,7 +15,6 @@ interface Order {
 
 const AdminDashboard = () => {
   const [orders, setOrders] = useState<Order[]>([]);  // Add the Order[] type here
-  const [user, setUser] = useState<User | null>(null);  // Properly type user state as User | null
   const router = useRouter();
 
   // Check if user is authenticated using Firebase
@@ -23,9 +22,7 @@ const AdminDashboard = () => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (!user) {
         router.push('/login');  // Redirect to login if not authenticated
-      } else {
-        setUser(user);  // Set user data if authenticated
-      }
+      } 
     });
 
     return () => unsubscribe();  // Cleanup on unmount

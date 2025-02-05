@@ -3,11 +3,17 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+
+
+
 type CartItem = {
   name: string;
   quantity: number;
   price: number;
-  [key: string]: any;
+  image?: string; // Image optional hai
+  color?:string;
+  size?:number;
+  // [key: string]: CustomKeyType;
 };
 
 type Cart = {

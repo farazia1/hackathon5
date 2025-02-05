@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { auth } from "@/app/firebaseConfig";
@@ -45,7 +45,7 @@ const Navbar = () => {
   const [error, setError] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
+  // const [searchQuery, setSearchQuery] = useState("");
 
   const toggleSearchDropdown = () => {
     setIsSearchDropdownOpen(!isSearchDropdownOpen);
@@ -54,32 +54,32 @@ const Navbar = () => {
 
   const handleSignup = async () => {
     try {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       console.log("User Signed Up:", userCredential.user);
       setAuthAction(null); // Close the form after signup
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("An unknown error occurred during signup.");
+      }
     }
   };
-
+  
   const handleSignin = async () => {
     try {
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
       console.log("User Signed In:", userCredential.user);
       setAuthAction(null); // Close the form after login
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("An unknown error occurred during signin.");
+      }
     }
   };
-
+  
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
@@ -88,9 +88,9 @@ const Navbar = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value); // Just update the search query without linking to any external logic
-  };
+  // const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setSearchQuery(e.target.value); // Just update the search query without linking to any external logic
+  // };
 
   return (
     <nav className="bg-white shadow-md w-full top-8 sticky z-10">
@@ -181,7 +181,7 @@ const Navbar = () => {
                   Casual
                 </Link>
                 <Link
-                  href="/Product-Details-page/Addtocart"
+                  href="/Product-Details-page"
                   className="block px-4 py-2 hover:bg-gray-100 transition-transform duration-300 hover:scale-110"
                 >
                   Cart
@@ -280,50 +280,55 @@ const Navbar = () => {
                 </div>
               ) : (
                 <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    authAction === "login" ? handleSignin() : handleSignup();
-                  }}
-                >
-                  <h3 className="text-lg font-semibold mb-2">
-                    {authAction === "login" ? "Login" : "Sign Up"}
-                  </h3>
-                  {error && (
-                    <p className="text-red-500 text-sm mb-2">{error}</p>
-                  )}
-                  <input
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="w-full mb-2 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                  <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="w-full mb-4 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
+  onSubmit={(e) => {
+    e.preventDefault();
+    if (authAction === "login") {
+      handleSignin();
+    } else if (authAction === "signup") {
+      handleSignup();
+    }
+  }}
+>
+  <h3 className="text-lg font-semibold mb-2">
+    {authAction === "login" ? "Login" : "Sign Up"}
+  </h3>
+  {error && (
+    <p className="text-red-500 text-sm mb-2">{error}</p>
+  )}
+  <input
+    type="email"
+    placeholder="Email"
+    value={email}
+    onChange={(e) => setEmail(e.target.value)}
+    className="w-full mb-2 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+  />
+  <input
+    type="password"
+    placeholder="Password"
+    value={password}
+    onChange={(e) => setPassword(e.target.value)}
+    className="w-full mb-4 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+  />
 
-                  <button
-                    type="submit"
-                    className={`w-full px-4 py-2 rounded-md text-white ${
-                      authAction === "login"
-                        ? "bg-blue-500 hover:bg-blue-600"
-                        : "bg-green-500 hover:bg-green-600"
-                    }`}
-                  >
-                    {authAction === "login" ? "Login" : "Sign Up"}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setAuthAction(null)}
-                    className="w-full mt-2 px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400"
-                  >
-                    Cancel
-                  </button>
-                </form>
+  <button
+    type="submit"
+    className={`w-full px-4 py-2 rounded-md text-white ${
+      authAction === "login"
+        ? "bg-blue-500 hover:bg-blue-600"
+        : "bg-green-500 hover:bg-green-600"
+    }`}
+  >
+    {authAction === "login" ? "Login" : "Sign Up"}
+  </button>
+  <button
+    type="button"
+    onClick={() => setAuthAction(null)}
+    className="w-full mt-2 px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400"
+  >
+    Cancel
+  </button>
+</form>
+
               )}
             </div>
           )}

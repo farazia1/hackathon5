@@ -6,4 +6,3 @@ export function GET(request:NextRequest){
     return  NextResponse.json({url:url});
 
 }
-export function POST(request:NextRequest){}

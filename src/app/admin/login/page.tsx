@@ -16,7 +16,8 @@ const LoginPage = () => {
       // Use the imported function
       await signInWithEmailAndPassword(auth, email, password);
       router.push('/admin'); // Redirect to the admin page
-    } catch (error) {
+    }  catch (error) {
+      console.error('Login failed:', error); // Log the error for debugging
       alert('Login failed. Please check your credentials.');
     }
   };

@@ -16,18 +16,21 @@ const SignupDialog = () => {
     setError(""); // Clear previous errors
     setSuccess(""); // Clear previous success messages
 
-    try {
+    try { 
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       console.log("User Signed Up:", userCredential.user);
       setSuccess("Signup successful!");
       setEmail(""); // Clear email field
       setPassword(""); // Clear password field
       setTimeout(() => setIsOpen(false), 1500); // Close modal after success
-    } catch (err: any) {
-      setError(err.message); // Display error message
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message); // Display error message
+      } else {
+        setError("An unexpected error occurred.");
+      }
     }
-  };
-
+  }    
   const toggleModal = () => {
     setIsOpen(!isOpen);
     setError(""); // Clear errors when opening/closing modal
